@@ -424,3 +424,12 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .dark .logo-wall .you small { color: rgba(246,242,238,0.7); }
 .logo-wall.on-dark img { filter: none; opacity: 0.85; }
 .logo-wall.on-dark li:hover img { opacity: 1; }
+
+/* Round 4: readability on the wash, strip labels, sponsor photo framing */
+.hero .eyebrow { color: rgba(246, 242, 238, 0.85); }
+.hero-wash { background:
+    linear-gradient(180deg, rgba(42, 20, 10, 0.4) 0%, rgba(122, 0, 0, 0.6) 45%, rgba(42, 20, 10, 0.94) 100%),
+    rgba(161, 0, 0, 0.35); }
+.hero-bg-right { object-position: 78% center; }
+.proof-strip.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 960px) { .proof-strip.three { grid-template-columns: 1fr; } .proof-strip.three > div { border-right: 0; margin-right: 0; border-bottom: 1px solid rgba(246,242,238,0.2); } .proof-strip.three > div:last-child { border-bottom: 0; } }
