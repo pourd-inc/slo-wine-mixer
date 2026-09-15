@@ -2,7 +2,9 @@
    1. Mobile nav
    2. Date embargo: countdown until REVEAL_AT, then swap in the date + venue + ticket slot
    3. Email capture (Supabase signups table, insert-only publishable key)
-   4. Copy-email buttons */
+   4. Copy-email buttons
+   5. Lightbox (photos page)
+   6. Hero slideshow (home page) */
 
 (function () {
   // ---- 1. Mobile nav -------------------------------------------------------
@@ -125,4 +127,141 @@
       }
     });
   });
+
+  // ---- 5. Lightbox -----------------------------------------------------
+  // Groups [data-lightbox] links by their group value (one per photo section).
+  // No-ops entirely when a page (like the home page) has none.
+  var lbLinks = document.querySelectorAll('[data-lightbox]');
+  if (lbLinks.length) {
+    var lbGroups = {};
+    lbLinks.forEach(function (a) {
+      var slug = a.getAttribute('data-lightbox');
+      if (!lbGroups[slug]) {
+        var section = a.closest('.photo-section');
+        var h2 = section ? section.querySelector('h2') : null;
+        lbGroups[slug] = { title: h2 ? h2.textContent.trim() : '', items: [] };
+      }
+      var img = a.querySelector('img');
+      lbGroups[slug].items.push({ href: a.getAttribute('href'), alt: img ? img.getAttribute('alt') : '' });
+    });
+
+    var lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.hidden = true;
+    lb.innerHTML =
+      '<div class="lightbox-stage">' +
+        '<button type="button" class="lightbox-close" aria-label="Close">&times;</button>' +
+        '<button type="button" class="lightbox-prev" aria-label="Previous photo">&lsaquo;</button>' +
+        '<img class="lightbox-img" alt="" />' +
+        '<button type="button" class="lightbox-next" aria-label="Next photo">&rsaquo;</button>' +
+        '<p class="lightbox-cap"></p>' +
+      '</div>';
+    document.body.appendChild(lb);
+
+    var lbImg = lb.querySelector('.lightbox-img');
+    var lbCap = lb.querySelector('.lightbox-cap');
+    var lbClose = lb.querySelector('.lightbox-close');
+    var lbPrev = lb.querySelector('.lightbox-prev');
+    var lbNext = lb.querySelector('.lightbox-next');
+
+    var curSlug = null, curIndex = 0, lastFocus = null, touchStartX = null;
+
+    function lbPreload(src) { var im = new window.Image(); im.src = src; }
+
+    function lbRender() {
+      var g = lbGroups[curSlug];
+      var item = g.items[curIndex];
+      lbImg.src = item.href;
+      lbImg.alt = item.alt || '';
+      lbCap.textContent = (curIndex + 1) + ' of ' + g.items.length + ' · ' + g.title;
+      lbPreload(g.items[(curIndex - 1 + g.items.length) % g.items.length].href);
+      lbPreload(g.items[(curIndex + 1) % g.items.length].href);
+    }
+
+    function lbOpen(slug, index) {
+      curSlug = slug;
+      curIndex = index;
+      lastFocus = document.activeElement;
+      lb.hidden = false;
+      document.body.style.overflow = 'hidden';
+      lbRender();
+      lbClose.focus();
+      document.addEventListener('keydown', lbOnKey);
+    }
+
+    function lbClose_() {
+      lb.hidden = true;
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', lbOnKey);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    function lbStep(dir) {
+      var g = lbGroups[curSlug];
+      curIndex = (curIndex + dir + g.items.length) % g.items.length;
+      lbRender();
+    }
+
+    function lbOnKey(e) {
+      if (e.key === 'Escape') lbClose_();
+      else if (e.key === 'ArrowLeft') lbStep(-1);
+      else if (e.key === 'ArrowRight') lbStep(1);
+    }
+
+    lbLinks.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var slug = a.getAttribute('data-lightbox');
+        var href = a.getAttribute('href');
+        var index = 0;
+        lbGroups[slug].items.forEach(function (it, i) { if (it.href === href) index = i; });
+        lbOpen(slug, index);
+      });
+    });
+
+    lbClose.addEventListener('click', lbClose_);
+    lbPrev.addEventListener('click', function () { lbStep(-1); });
+    lbNext.addEventListener('click', function () { lbStep(1); });
+    lb.addEventListener('click', function (e) {
+      if (e.target === lb || e.target.classList.contains('lightbox-stage')) lbClose_();
+    });
+    lb.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      if (touchStartX === null) return;
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) lbStep(dx > 0 ? -1 : 1);
+      touchStartX = null;
+    }, { passive: true });
+  }
+
+  // ---- 6. Hero slideshow -------------------------------------------------
+  // Slide 1 is the existing static hero-bg image (always visible, no change).
+  // Extra slides carry data-slide + data-src; they lazy-load after window
+  // load and crossfade in on a 6s interval. No-ops with one slide, or with
+  // prefers-reduced-motion (only the first image ever shows).
+  var heroSlides = document.querySelectorAll('.hero-bg');
+  if (heroSlides.length > 1) {
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+      var extraSlides = document.querySelectorAll('.hero-bg[data-slide]');
+      function loadSlides() {
+        extraSlides.forEach(function (img) {
+          var src = img.getAttribute('data-src');
+          if (src) { img.src = src; img.removeAttribute('data-src'); }
+        });
+      }
+      if (document.readyState === 'complete') loadSlides();
+      else window.addEventListener('load', loadSlides);
+
+      var slideOrder = Array.prototype.slice.call(heroSlides);
+      var slideIndex = 0;
+      setInterval(function () {
+        var prev = slideOrder[slideIndex];
+        slideIndex = (slideIndex + 1) % slideOrder.length;
+        var next = slideOrder[slideIndex];
+        if (prev.hasAttribute('data-slide')) prev.classList.remove('is-active');
+        if (next.hasAttribute('data-slide')) next.classList.add('is-active');
+      }, 6000);
+    }
+  }
 })();
