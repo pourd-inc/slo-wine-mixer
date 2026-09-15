@@ -416,3 +416,11 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .proof-strip.on-hero { background: rgba(42, 29, 18, 0.7); }
   .proof-strip.on-hero > div { border-bottom-color: rgba(246, 242, 238, 0.2); }
 }
+
+/* Logo wall lives on the dark ground: the winery marks are white PNGs. */
+.dark .more-logos summary { color: var(--gold); }
+.link.on-dark { color: var(--cream); }
+.dark .logo-wall .you { background: var(--ink); color: var(--gold); }
+.dark .logo-wall .you small { color: rgba(246,242,238,0.7); }
+.logo-wall.on-dark img { filter: none; opacity: 0.85; }
+.logo-wall.on-dark li:hover img { opacity: 1; }
