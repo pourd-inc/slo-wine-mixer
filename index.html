@@ -3,17 +3,20 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SLO Wine Mixer · Year 2 · San Luis Obispo</title>
-<meta name="description" content="The SLO Wine Mixer returns to San Luis Obispo in 2027. Central Coast wineries, live music, a mechanical bull. The Year 2 date is announced October 12." />
+<title>SLO Wine Mixer · April 3, 2027 · San Luis Obispo</title>
+<meta name="description" content="The SLO Wine Mixer returns Saturday, April 3, 2027 at the Madonna Inn Expo Center in San Luis Obispo. Unlimited tastings from Central Coast wineries, live music and an outdoor village. Tickets from $65, no fees." />
+<link rel="canonical" href="https://slowinemixer.com/" />
 <meta property="og:title" content="SLO Wine Mixer · Year 2" />
-<meta property="og:description" content="Central Coast wineries, live music, a mechanical bull. The Year 2 date is announced October 12." />
-<meta property="og:image" content="https://slo-wine-mixer.vercel.app/assets/DSCF2495.jpg" />
+<meta property="og:description" content="Saturday, April 3, 2027 · Madonna Inn Expo Center, SLO. Central Coast wineries, live music, Coastal Cowboy. Tickets from $65, no fees." />
+<meta property="og:url" content="https://slowinemixer.com/" />
+<meta property="og:image" content="https://slowinemixer.com/assets/DSCF2495.jpg" />
 <meta property="og:type" content="website" />
 <link rel="icon" href="assets/swm-logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<script src="https://www.my805tix.com/ts_modal.js"></script>
 </head>
 <body>
 
@@ -21,14 +24,14 @@
   <div class="wrap nav-inner">
     <a href="/" class="nav-logo" aria-label="SLO Wine Mixer home"><img src="assets/swm-logo.png" alt="SLO Wine Mixer" /></a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="/#tickets">Tickets</a>
       <a href="#mixer">The Mixer</a>
-      <a href="#year-1">Year 1</a>
       <a href="/photos">Photos</a>
       <a href="/wineries">Wineries</a>
       <a href="/sponsors">Sponsors</a>
-      <a href="#list" class="btn red" data-before-reveal>Get the date</a>
-      <a href="#tickets" class="btn red" data-after-reveal hidden>Tickets</a>
+      <button type="button" class="btn red" data-tix>Buy tickets</button>
     </nav>
+    <button type="button" class="btn red nav-buy" data-tix>Tickets</button>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -45,35 +48,31 @@
     <img class="hero-bg" data-slide data-src="photos/event/dscf2456.jpg" alt="" />
     <div class="hero-wash" aria-hidden="true"></div>
     <div class="wrap hero-inner">
-      <span class="eyebrow">SLO Wine Mixer · San Luis Obispo · Returning in 2027</span>
-      <h1 id="open-h">Good wine. Live music. Mechanical bull.</h1>
-      <p class="lede">Central Coast wineries pouring for one very good afternoon at the Madonna Inn Expo Center. Year 1 drew about 750 guests and 41 wineries. Year 2 is on the way.</p>
+      <span class="eyebrow">SLO Wine Mixer · Year 2 · San Luis Obispo</span>
+      <h1 id="open-h">Good wine. Live music. Coastal Cowboy.</h1>
+      <p class="lede">A wine tasting that feels like a festival. Central Coast wineries pouring unlimited samples, a live band all afternoon, and an outdoor village of food trucks, vendors and activations.</p>
 
       <div class="hero-actions">
-        <div data-before-reveal>
-          <p class="announce"><b>2027 date announced Monday, October 12</b><span id="cd-line" class="cd-line">--d --h --m</span></p>
-        </div>
-        <div data-after-reveal hidden>
-          <p class="date-line"><span data-fill="date"></span><small>Madonna Inn Expo Center · San Luis Obispo, CA</small></p>
+        <p class="date-line">Saturday, April 3, 2027 · 2–5 PM<small>Madonna Inn Expo Center · San Luis Obispo, CA</small></p>
+
+        <div class="buy">
+          <button type="button" class="btn gold btn-lg" data-tix>Buy tickets</button>
+          <p class="buy-note" data-before-onsale>Early Bird opens December 1 at $65. No fees on any ticket.</p>
+          <p class="buy-note" data-after-onsale hidden>From $65. No fees on any ticket. <a class="link on-dark" href="#tickets">See prices</a></p>
         </div>
 
         <div id="list">
           <form class="capture on-dark" data-source="home" novalidate>
             <label for="homeEmail" class="sr">Email address</label>
             <input type="email" id="homeEmail" name="email" placeholder="you@email.com" required autocomplete="email" />
-            <button type="submit" class="btn gold">Join the list</button>
-            <span class="note">The date announcement on October 12, plus one email when tickets go on sale.</span>
+            <button type="submit" class="btn ghost">Join the list</button>
+            <span class="note" data-before-onsale>Not ready yet? One email when Early Bird opens, then event updates.</span>
+            <span class="note" data-after-onsale hidden>Not ready yet? Event updates and the lineup as it lands.</span>
             <span class="msg" role="status" aria-live="polite"></span>
           </form>
         </div>
-
-        <div id="tickets" class="tickets" data-after-reveal hidden>
-          <!-- 805 Tix embed goes here when tickets go live. Leave the id. -->
-          <div id="tickets-embed"></div>
-          <p>Tickets are not on sale yet. The list hears first.</p>
-        </div>
       </div>
-      <p class="hero-cap">Year 1 · June 6, 2026 · Madonna Inn Expo Center</p>
+      <p class="hero-cap">Photos from Year 1 · June 6, 2026</p>
     </div>
   </section>
 
@@ -81,11 +80,33 @@
   <section class="section facts" aria-label="Quick answers">
     <div class="wrap">
       <dl class="fact-row">
-        <div><dt>Date</dt><dd data-before-reveal>Announced October 12, 2026</dd><dd data-after-reveal hidden><span data-fill="date"></span></dd></div>
-        <div><dt>Venue</dt><dd>Madonna Inn Expo Center, San Luis Obispo. Confirmed.</dd></div>
-        <div><dt>Tickets</dt><dd data-before-reveal>Not on sale yet. Join the list to hear first.</dd><dd data-after-reveal hidden>On sale soon. Join the list to hear first.</dd></div>
+        <div><dt>Date</dt><dd>Saturday, April 3, 2027. 2–5 PM.</dd></div>
+        <div><dt>Venue</dt><dd>Madonna Inn Expo Center, 120 Madonna Road, San Luis Obispo.</dd></div>
+        <div><dt>Tickets</dt><dd data-before-onsale>From $65. Early Bird opens December 1. No fees.</dd><dd data-after-onsale hidden>On sale now from $65. No fees.</dd></div>
         <div><dt>Age</dt><dd>21 and over. ID at the door.</dd></div>
       </dl>
+    </div>
+  </section>
+
+  <!-- Tickets -->
+  <section class="section cream2" id="tickets" aria-labelledby="tix-h">
+    <div class="wrap two">
+      <header>
+        <span class="eyebrow">Tickets</span>
+        <h2 id="tix-h">The earlier you buy, the less you pay.</h2>
+        <p class="lede" style="margin-top:18px">No fees on any ticket this year. The price you see is the price you pay.</p>
+        <p style="margin-top:22px"><button type="button" class="btn red btn-lg" data-tix>Buy tickets</button></p>
+      </header>
+      <div>
+        <ol class="tiers">
+          <li><div><h3>Early Bird</h3><p>December 1 – December 31</p></div><b>$65</b></li>
+          <li><div><h3>Advance Presale</h3><p>January 1 – February 19</p></div><b>$80</b></li>
+          <li><div><h3>General Admission</h3><p>February 20 – April 2</p></div><b>$95</b></li>
+          <li><div><h3>At the door</h3><p>April 3</p></div><b>$105</b></li>
+        </ol>
+        <p class="also"><b>Every ticket includes</b> a souvenir tasting cup, unlimited samples from Central Coast wineries, the outdoor village and live music the whole time.</p>
+        <p class="also"><b>Getting here.</b> Rideshare, a designated driver or the shuttle. Shuttle pickup points are announced closer to the event. Please do not drive.</p>
+      </div>
     </div>
   </section>
 
@@ -95,16 +116,37 @@
       <div class="two">
         <header>
           <span class="eyebrow">What happens at the Mixer</span>
-          <h2 id="mixer-h">At the first Mixer: wine, music, mechanical bull.</h2>
-          <p class="lede" style="margin-top:18px">How Year 1 ran in June 2026. The 2027 lineup of wineries and activities is confirmed closer to the date.</p>
+          <h2 id="mixer-h">Year 2 is bigger, on purpose.</h2>
+          <p class="lede" style="margin-top:18px">Wine and the band stay inside. Everything else moves outdoors. Winery lineup, activations and inclusions are announced as they are confirmed.</p>
         </header>
         <div>
           <ol class="numbered big">
-            <li><b>01</b><div><h3>Unlimited tastings from Central Coast wineries</h3><p>One wristband opened every pouring table in the building. Paso, Edna Valley, SLO Coast and beyond. Guests brought the glass back as many times as they liked.</p></div></li>
-            <li><b>02</b><div><h3>A live band and a DJ</h3><p>Music from doors to last call: a full band on stage and a DJ between sets.</p></div></li>
-            <li><b>03</b><div><h3>The mechanical bull</h3><p>Guests took turns on the bull between tastings, hats on, crowd cheering.</p></div></li>
+            <li><b>01</b><div><h3>Unlimited tastings from Central Coast wineries</h3><p>One cup opens every pouring table in the building. Paso, Edna Valley, SLO Coast and beyond, building toward 60 producers this year.</p></div></li>
+            <li><b>02</b><div><h3>Live music the whole time</h3><p>A band on stage from doors to last pour, with a dance floor in front of it.</p></div></li>
+            <li><b>03</b><div><h3>An outdoor village</h3><p>Food trucks, vendors, a photo booth and activations, with more to be announced.</p></div></li>
           </ol>
-          <p class="also"><b>Also on the floor at Year 1:</b> short "No Snob" wine classes that teach you what you actually like, photo backdrops and neon, and the Wine Window, a walk-up pour done Central Coast style.</p>
+          <p class="also"><b>Coastal Cowboy is the dress code.</b> Hats, boots, denim, whatever the coast means to you. Same brand, same cups as Year 1.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner links: short, secondary -->
+  <section class="section cream2" aria-labelledby="doors-h">
+    <div class="wrap">
+      <h2 id="doors-h" class="sr">Pour with us. Partner with us.</h2>
+      <div class="doors">
+        <div class="door">
+          <span class="eyebrow" style="margin-bottom:0">Wineries</span>
+          <h3>Pour with us.</h3>
+          <p>What it takes to pour at Year 2, what you get back, and how to sign up for a booth.</p>
+          <a href="/wineries" class="btn">Pour at Year 2</a>
+        </div>
+        <div class="door">
+          <span class="eyebrow" style="margin-bottom:0">Sponsors</span>
+          <h3>Partner with us.</h3>
+          <p>Sponsor the stage, the outdoor village or the photo wall. Placements, partnership types and how to ask about 2027.</p>
+          <a href="/sponsors" class="btn">Sponsorship options</a>
         </div>
       </div>
     </div>
@@ -142,7 +184,7 @@
           <span class="eyebrow">Poured at Year 1 · 2026 lineup</span>
           <h2 id="poured-h">Meet the 41 wineries that poured in 2026.</h2>
         </header>
-        <p class="lede">The 2027 lineup is being confirmed now. Make wine on the Central Coast? <a class="link on-dark" href="/wineries">Pour with us.</a></p>
+        <p class="lede">The 2027 lineup is being confirmed now, building toward 60 producers. Make wine on the Central Coast? <a class="link on-dark" href="/wineries">Pour with us.</a></p>
       </div>
       <ul class="logo-wall on-dark" aria-label="Wineries that poured at Year 1, 2026">
         <li><img src="logos/tolosa-winery.png" alt="Tolosa Winery" loading="lazy" /></li>
@@ -196,38 +238,16 @@
     </div>
   </section>
 
-  <!-- Partner links: short, secondary -->
-  <section class="section cream2" aria-labelledby="doors-h">
-    <div class="wrap">
-      <h2 id="doors-h" class="sr">Pour with us. Partner with us.</h2>
-      <div class="doors">
-        <div class="door">
-          <span class="eyebrow" style="margin-bottom:0">Wineries</span>
-          <h3>Pour with us.</h3>
-          <p>What it takes to pour at Year 2, what you get back, and how to request details.</p>
-          <a href="/wineries" class="btn">Winery details</a>
-        </div>
-        <div class="door">
-          <span class="eyebrow" style="margin-bottom:0">Sponsors</span>
-          <h3>Partner with us.</h3>
-          <p>Sponsor the bull, the stage or the photo wall. Placements, partnership types and how to ask about 2027.</p>
-          <a href="/sponsors" class="btn">Sponsorship options</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Final signup -->
   <section class="section red" aria-labelledby="list-h">
     <div class="wrap two" style="align-items:center">
       <header style="position:static">
         <span class="eyebrow">Stay close</span>
-        <h2 id="list-h" data-before-reveal>The date is announced October 12.</h2>
-        <h2 id="list-h2" data-after-reveal hidden><span data-fill="date"></span>. Be there.</h2>
+        <h2 id="list-h">Saturday, April 3, 2027. Be there.</h2>
       </header>
       <div>
-        <p class="lede" style="margin-bottom:22px" data-before-reveal>Get the announcement by email on October 12, then one more email when tickets go on sale.</p>
-        <p class="lede" style="margin-bottom:22px" data-after-reveal hidden>Madonna Inn Expo Center, San Luis Obispo. One email when tickets go on sale.</p>
+        <p class="lede" style="margin-bottom:22px" data-before-onsale>Madonna Inn Expo Center, San Luis Obispo. One email when Early Bird opens December 1, then event updates.</p>
+        <p class="lede" style="margin-bottom:22px" data-after-onsale hidden>Madonna Inn Expo Center, San Luis Obispo. Event updates and the lineup as it lands.</p>
         <form class="capture on-red" data-source="footer-band" novalidate>
           <label for="bandEmail" class="sr">Email address</label>
           <input type="email" id="bandEmail" name="email" placeholder="you@email.com" required autocomplete="email" />
@@ -245,12 +265,12 @@
     <div class="foot-grid">
       <div>
         <a href="/" class="foot-logo" aria-label="SLO Wine Mixer home"><img src="assets/swm-logo.png" alt="SLO Wine Mixer" /></a>
-        <p>Madonna Inn Expo Center<br />San Luis Obispo, CA<br />A Wine Event Z LLC production.</p>
+        <p>Saturday, April 3, 2027 · 2–5 PM<br />Madonna Inn Expo Center<br />120 Madonna Road, San Luis Obispo, CA<br />A Wine Event Z LLC production.</p>
       </div>
       <nav class="foot-nav" aria-label="Footer">
         <b>The Mixer</b>
-        <a href="#mixer">What happens</a>
-        <a href="#year-1">Year 1</a>
+        <a href="/#tickets">Tickets</a>
+        <a href="/#mixer">What happens</a>
         <a href="/photos">Year 1 photos</a>
         <a href="#list">Join the list</a>
       </nav>
@@ -260,9 +280,16 @@
         <a href="/sponsors">Sponsors</a>
         <a href="mailto:hello@pourdhq.com">hello@pourdhq.com</a>
       </nav>
+      <nav class="foot-nav" aria-label="Social">
+        <b>Follow</b>
+        <a href="https://www.instagram.com/slowinemixer/" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@slowinemixer" rel="noopener">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=61587563201383" rel="noopener">Facebook</a>
+        <a href="https://www.linkedin.com/company/slo-wine-mixer/" rel="noopener">LinkedIn</a>
+      </nav>
     </div>
     <div class="foot-bottom">
-      <span>&copy; 2026 Wine Event Z LLC. All rights reserved. <a href="https://pourdhq.com/admin" class="admin">Admin</a></span>
+      <span>&copy; 2026 Wine Event Z LLC. All rights reserved.</span>
       <a href="https://pourdhq.com" class="poured" rel="noopener">poured by <img src="https://pourdhq.com/pourd-logo.png" alt="pourd" width="1267" height="412" /></a>
     </div>
   </div>

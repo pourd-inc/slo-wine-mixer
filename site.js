@@ -1,10 +1,11 @@
 /* SLO Wine Mixer · shared behavior
    1. Mobile nav
-   2. Date embargo: countdown until REVEAL_AT, then swap in the date + venue + ticket slot
+   2. Ticket on-sale switch (Dec 1) + My805Tix sales modal
    3. Email capture (Supabase signups table, insert-only publishable key)
    4. Copy-email buttons
    5. Lightbox (photos page)
-   6. Hero slideshow (home page) */
+   6. Hero slideshow (home page)
+   7. Sponsor inquiry form (posts to /api/sponsor-inquiry, falls back to email) */
 
 (function () {
   // ---- 1. Mobile nav -------------------------------------------------------
@@ -23,48 +24,40 @@
     });
   }
 
-  // ---- 2. Date embargo -----------------------------------------------------
-  // The Year 2 date is announced Monday, October 12, 2026 at 9:00 AM Pacific.
-  // Before that: countdown. After: the date, venue and ticket slot appear, and
-  // every element marked data-after-reveal shows while data-before-reveal hides.
-  // To move the announcement, change this one line.
-  var REVEAL_AT = new Date('2026-10-12T09:00:00-07:00').getTime();
+  // ---- 2. Ticket on-sale switch + 805 Tix modal ---------------------------
+  // Public sale (Early Bird) opens December 1, 2026. Before that, elements
+  // marked data-before-onsale show; from then on, data-after-onsale shows.
+  // To move the on-sale moment, change this one line.
+  var ONSALE_AT = new Date('2026-12-01T00:00:00-08:00').getTime();
+  var onSale = Date.now() >= ONSALE_AT;
+  document.querySelectorAll('[data-before-onsale]').forEach(function (el) { el.hidden = onSale; });
+  document.querySelectorAll('[data-after-onsale]').forEach(function (el) { el.hidden = !onSale; });
 
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
-
-  // The date string itself is not written in the HTML, so a view-source or a
-  // search crawler before October 12 does not find it. Decoded only on reveal.
-  var FILLS = { date: 'U2F0dXJkYXksIEFwcmlsIDMsIDIwMjc=' };
-
-  function applyReveal(revealed) {
-    document.querySelectorAll('[data-before-reveal]').forEach(function (el) { el.hidden = revealed; });
-    document.querySelectorAll('[data-after-reveal]').forEach(function (el) { el.hidden = !revealed; });
-    if (revealed) {
-      document.querySelectorAll('[data-fill]').forEach(function (el) {
-        var key = el.getAttribute('data-fill');
-        if (FILLS[key]) { try { el.textContent = atob(FILLS[key]); } catch (e) { /* leave empty */ } }
+  // Every [data-tix] button opens the My805Tix sales modal, so guests buy
+  // without leaving the site. The modal script (loaded in each page's <head>)
+  // is built once against a single hidden trigger; our buttons click it.
+  // If the script failed to load, the buttons go to the 805 Tix page instead.
+  var TIX_URL = 'https://www.my805tix.com/e/slowinemixer2/tickets';
+  var tixButtons = document.querySelectorAll('[data-tix]');
+  if (tixButtons.length) {
+    var tixTrigger = null;
+    if (window.TSModals && window.TSModals.buildModal) {
+      tixTrigger = document.createElement('button');
+      tixTrigger.type = 'button';
+      tixTrigger.id = 'my805tix-trigger';
+      tixTrigger.hidden = true;
+      tixTrigger.setAttribute('aria-hidden', 'true');
+      tixTrigger.tabIndex = -1;
+      document.body.appendChild(tixTrigger);
+      window.TSModals.buildModal({ url: TIX_URL, modalTriggerElementId: 'my805tix-trigger' });
+    }
+    tixButtons.forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (tixTrigger) tixTrigger.click();
+        else window.location.href = TIX_URL;
       });
-    }
-  }
-
-  function tick() {
-    var now = Date.now();
-    var diff = REVEAL_AT - now;
-    if (diff <= 0) {
-      applyReveal(true);
-      return false;
-    }
-    var d = Math.floor(diff / 86400000);
-    var h = Math.floor((diff % 86400000) / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var line = document.getElementById('cd-line');
-    if (line) line.textContent = d + 'd ' + pad(h) + 'h ' + pad(m) + 'm';
-    return true;
-  }
-
-  applyReveal(Date.now() >= REVEAL_AT);
-  if (tick()) {
-    var timer = setInterval(function () { if (!tick()) clearInterval(timer); }, 30000);
+    });
   }
 
   // ---- 3. Email capture ----------------------------------------------------
@@ -97,7 +90,9 @@
         body: JSON.stringify({ email: val, source: source })
       }).then(function (r) {
         if (r.status === 201) {
-          msg.textContent = 'You are on the list. The date lands in your inbox October 12.';
+          msg.textContent = onSale
+            ? 'You are on the list. Event updates land in your inbox.'
+            : 'You are on the list. We will email you when Early Bird opens December 1.';
           input.value = '';
         } else if (r.status === 409) {
           msg.textContent = 'You are already on the list. Sit tight.';
@@ -263,5 +258,49 @@
         if (next.hasAttribute('data-slide')) next.classList.add('is-active');
       }, 6000);
     }
+  }
+
+  // ---- 7. Sponsor inquiry --------------------------------------------------
+  var sForm = document.getElementById('sponsorForm');
+  if (sForm) {
+    var sMsg = sForm.querySelector('.msg');
+    var sBtn = sForm.querySelector('button[type="submit"]');
+    var INBOX = 'hello@pourdhq.com';
+    var mailtoFor = function (d) {
+      var body = 'Name: ' + d.name + '\nBrand: ' + d.company + '\nEmail: ' + d.email +
+        (d.phone ? '\nPhone: ' + d.phone : '') + '\nInterested in: ' + d.interest + '\n\n' + d.message;
+      return 'mailto:' + INBOX + '?subject=' + encodeURIComponent('SLO Wine Mixer 2027 sponsorship: ' + d.company) +
+        '&body=' + encodeURIComponent(body);
+    };
+    sForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var d = {};
+      ['name', 'company', 'email', 'phone', 'interest', 'message', 'website'].forEach(function (k) {
+        var el = sForm.elements[k];
+        d[k] = el ? (el.value || '').trim() : '';
+      });
+      if (!d.name || !d.company || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) {
+        sMsg.textContent = 'Add your name, brand and a valid email, then send.';
+        return;
+      }
+      sBtn.disabled = true;
+      sMsg.textContent = 'Sending...';
+      fetch('/api/sponsor-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(d)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('status ' + r.status);
+        sMsg.textContent = 'Thanks, ' + d.name.split(' ')[0] + '. We will reply within two business days with the sponsor deck.';
+        sForm.reset();
+      }).catch(function () {
+        sMsg.textContent = 'That did not send. ';
+        var a = document.createElement('a');
+        a.href = mailtoFor(d);
+        a.textContent = 'Email it to ' + INBOX + ' instead';
+        sMsg.appendChild(a);
+        sMsg.appendChild(document.createTextNode(' (your answers are filled in).'));
+      }).finally(function () { sBtn.disabled = false; });
+    });
   }
 })();

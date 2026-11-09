@@ -7,12 +7,14 @@
 <meta name="description" content="158 photos from Year 1 of the SLO Wine Mixer: the tastings, the mechanical bull, the No Snob wine class, Way Out West on stage, and the crowd that came out." />
 <meta property="og:title" content="Year 1 photos · SLO Wine Mixer" />
 <meta property="og:description" content="158 photos from Year 1: tastings, the mechanical bull, live music and about 750 guests at the Madonna Inn Expo Center." />
-<meta property="og:image" content="https://slo-wine-mixer.vercel.app/photos/event/dscf2823.jpg" />
+<meta property="og:image" content="https://slowinemixer.com/photos/event/dscf2823.jpg" />
+<link rel="canonical" href="https://slowinemixer.com/photos" />
 <link rel="icon" href="assets/swm-logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Sansita:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<script src="https://www.my805tix.com/ts_modal.js"></script>
 </head>
 <body>
 
@@ -20,12 +22,14 @@
   <div class="wrap nav-inner">
     <a href="/" class="nav-logo" aria-label="SLO Wine Mixer home"><img src="assets/swm-logo.png" alt="SLO Wine Mixer" /></a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="/#tickets">Tickets</a>
       <a href="/#mixer">The Mixer</a>
-      <a href="/#year-1">Year 1</a>
       <a href="/photos" aria-current="page">Photos</a>
       <a href="/wineries">Wineries</a>
       <a href="/sponsors">Sponsors</a>
+      <button type="button" class="btn red" data-tix>Buy tickets</button>
     </nav>
+    <button type="button" class="btn red nav-buy" data-tix>Tickets</button>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -254,12 +258,12 @@
     <div class="wrap two" style="align-items:center">
       <header style="position:static">
         <span class="eyebrow">Stay close</span>
-        <h2 id="list-h" data-before-reveal>The date is announced October 12.</h2>
-        <h2 id="list-h2" data-after-reveal hidden><span data-fill="date"></span>. Be there.</h2>
+        <h2 id="list-h">Year 2 is Saturday, April 3, 2027.</h2>
       </header>
       <div>
-        <p class="lede" style="margin-bottom:22px" data-before-reveal>Get the announcement by email on October 12, then one more email when tickets go on sale.</p>
-        <p class="lede" style="margin-bottom:22px" data-after-reveal hidden>Madonna Inn Expo Center, San Luis Obispo. One email when tickets go on sale.</p>
+        <p class="lede" style="margin-bottom:18px">Madonna Inn Expo Center, 2–5 PM. Tickets from $65, no fees.</p>
+        <p style="margin-bottom:22px"><button type="button" class="btn gold" data-tix>Buy tickets</button></p>
+        <p class="fine on-red" style="margin:0 0 10px">Or join the list for event updates.</p>
         <form class="capture on-red" data-source="photos" novalidate>
           <label for="photosEmail" class="sr">Email address</label>
           <input type="email" id="photosEmail" name="email" placeholder="you@email.com" required autocomplete="email" />
@@ -277,12 +281,12 @@
     <div class="foot-grid">
       <div>
         <a href="/" class="foot-logo" aria-label="SLO Wine Mixer home"><img src="assets/swm-logo.png" alt="SLO Wine Mixer" /></a>
-        <p>Madonna Inn Expo Center<br />San Luis Obispo, CA<br />A Wine Event Z LLC production.</p>
+        <p>Saturday, April 3, 2027 · 2–5 PM<br />Madonna Inn Expo Center<br />120 Madonna Road, San Luis Obispo, CA<br />A Wine Event Z LLC production.</p>
       </div>
       <nav class="foot-nav" aria-label="Footer">
         <b>The Mixer</b>
+        <a href="/#tickets">Tickets</a>
         <a href="/#mixer">What happens</a>
-        <a href="/#year-1">Year 1</a>
         <a href="/photos">Year 1 photos</a>
         <a href="/#list">Join the list</a>
       </nav>
@@ -292,9 +296,16 @@
         <a href="/sponsors">Sponsors</a>
         <a href="mailto:hello@pourdhq.com">hello@pourdhq.com</a>
       </nav>
+      <nav class="foot-nav" aria-label="Social">
+        <b>Follow</b>
+        <a href="https://www.instagram.com/slowinemixer/" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@slowinemixer" rel="noopener">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=61587563201383" rel="noopener">Facebook</a>
+        <a href="https://www.linkedin.com/company/slo-wine-mixer/" rel="noopener">LinkedIn</a>
+      </nav>
     </div>
     <div class="foot-bottom">
-      <span>&copy; 2026 Wine Event Z LLC. All rights reserved. <a href="https://pourdhq.com/admin" class="admin">Admin</a></span>
+      <span>&copy; 2026 Wine Event Z LLC. All rights reserved.</span>
       <a href="https://pourdhq.com" class="poured" rel="noopener">poured by <img src="https://pourdhq.com/pourd-logo.png" alt="pourd" width="1267" height="412" /></a>
     </div>
   </div>

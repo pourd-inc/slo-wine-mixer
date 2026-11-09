@@ -202,7 +202,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 
 /* ---------- Footer ---------- */
 .foot { background: var(--ink); color: rgba(246, 242, 238, 0.8); padding-block: 56px 32px; }
-.foot-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 40px; }
+.foot-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 40px; }
 .foot-logo img { height: 30px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
 .foot p { margin-top: 14px; font-size: 0.92rem; max-width: 34ch; }
 .foot-nav { display: grid; gap: 10px; align-content: start; }
@@ -217,8 +217,6 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .poured { display: inline-flex; align-items: center; gap: 10px; color: rgba(246, 242, 238, 0.8); }
 .poured img { height: 20px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
 .poured:hover img { opacity: 1; }
-.admin { opacity: 0.5; text-decoration: underline; text-underline-offset: 3px; }
-.admin:hover { opacity: 1; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
@@ -504,3 +502,38 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 .year1-more { margin-top: 28px; }
 .dark .btn:not(.red):not(.gold):not(.ghost) { border-color: var(--cream); background: var(--cream); color: var(--ink); }
 .dark .btn:not(.red):not(.gold):not(.ghost):hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+
+/* ---------- Tickets (Year 2) ---------- */
+.btn-lg { min-height: 60px; padding: 0 34px; font-size: 1.05rem; }
+.nav-buy { display: none; min-height: 40px; padding: 0 16px; font-size: 0.85rem; margin-left: auto; margin-right: 12px; }
+.buy { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin: 22px 0 26px; }
+.buy-note { font-size: 0.95rem; font-weight: 600; color: rgba(246, 242, 238, 0.9); max-width: 36ch; }
+.tiers { list-style: none; border-top: 2px solid var(--ink); }
+.tiers li { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.tiers h3 { font-size: 1.15rem; }
+.tiers p { font-size: 0.92rem; color: var(--ink-soft); margin-top: 2px; }
+.tiers b { font-family: "Sansita", serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--red); }
+
+/* ---------- Sponsor inquiry form ---------- */
+.sponsor-form { display: grid; gap: 14px; max-width: 560px; }
+.sponsor-form .sf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.sponsor-form label { display: grid; gap: 6px; font-size: 0.85rem; font-weight: 600; color: rgba(246, 242, 238, 0.92); }
+.sponsor-form label small { font-weight: 400; opacity: 0.75; }
+.sponsor-form input, .sponsor-form select, .sponsor-form textarea {
+  font: inherit; font-size: 1rem; font-weight: 400; color: #fff;
+  background: transparent; border: 2px solid rgba(255, 255, 255, 0.6); padding: 12px 14px; border-radius: 0; width: 100%;
+}
+.sponsor-form select option { color: var(--ink); }
+.sponsor-form textarea { resize: vertical; min-height: 110px; }
+.sponsor-form input:focus-visible, .sponsor-form select:focus-visible, .sponsor-form textarea:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.sponsor-form .btn { justify-self: start; }
+.sponsor-form .msg { font-size: 0.92rem; font-weight: 600; min-height: 1.3em; color: rgba(246, 242, 238, 0.95); }
+.sponsor-form .msg a, .fine.on-red a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.sf-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+@media (max-width: 680px) {
+  .nav-buy { display: inline-flex; }
+  .nav-links .btn { display: none; }
+  .sponsor-form .sf-row { grid-template-columns: 1fr; }
+  .tiers li { align-items: flex-start; }
+}
