@@ -4,7 +4,7 @@
    3. Email capture (Supabase signups table, insert-only publishable key)
    4. Copy-email buttons
    5. Lightbox (photos page)
-   6. Hero slideshow (home page)
+   6. Hero slideshow (home page) + photo strip pause
    7. Sponsor inquiry form (posts to /api/sponsor-inquiry, falls back to email) */
 
 (function () {
@@ -32,6 +32,60 @@
   var onSale = Date.now() >= ONSALE_AT;
   document.querySelectorAll('[data-before-onsale]').forEach(function (el) { el.hidden = onSale; });
   document.querySelectorAll('[data-after-onsale]').forEach(function (el) { el.hidden = !onSale; });
+
+  // Current ticket tier, by date (Pacific). Drives the hero ticket card,
+  // the mobile buy bar and the "Now" marker in the price list.
+  var TIERS = [
+    { key: 'early',   name: 'Early Bird',        price: '$65',  start: '2026-12-01T00:00:00-08:00', until: 'through December 31' },
+    { key: 'advance', name: 'Advance Presale',   price: '$80',  start: '2027-01-01T00:00:00-08:00', until: 'through February 19' },
+    { key: 'ga',      name: 'General Admission', price: '$95',  start: '2027-02-20T00:00:00-08:00', until: 'through April 2' },
+    { key: 'door',    name: 'At the door',       price: '$105', start: '2027-04-03T00:00:00-07:00', until: 'April 3 only' }
+  ];
+  var nowMs = Date.now();
+  var tier = null;
+  TIERS.forEach(function (t) { if (nowMs >= new Date(t.start).getTime()) tier = t; });
+  var tierPrice = tier ? tier.price : TIERS[0].price;
+  var tierLabel = tier ? tier.name + ' · ' + tier.until : 'Early Bird opens December 1';
+  document.querySelectorAll('[data-tier-price]').forEach(function (el) { el.textContent = tierPrice; });
+  document.querySelectorAll('[data-tier-label]').forEach(function (el) { el.textContent = tierLabel; });
+  if (tier) {
+    var cur = document.querySelector('[data-tier="' + tier.key + '"]');
+    if (cur) {
+      cur.classList.add('is-current');
+      var tag = document.createElement('span');
+      tag.className = 'now-tag';
+      tag.textContent = 'On sale now';
+      var h = cur.querySelector('h3');
+      if (h) h.appendChild(tag);
+    }
+  }
+
+  // Mobile buy bar: appears once the main ticket button has scrolled away,
+  // hides again over the footer so it never covers content at the end.
+  var buyBar = document.getElementById('buyBar');
+  if (buyBar && 'IntersectionObserver' in window) {
+    var heroBuy = document.getElementById('heroBuy');
+    var foot = document.querySelector('.foot');
+    var heroVisible = !!heroBuy, footVisible = false, scrolled = false;
+    var syncBar = function () {
+      var show = scrolled && !heroVisible && !footVisible;
+      buyBar.hidden = !show;
+      document.body.classList.toggle('has-buy-bar', show);
+    };
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.target === heroBuy) heroVisible = en.isIntersecting;
+        if (en.target === foot) footVisible = en.isIntersecting;
+      });
+      syncBar();
+    });
+    if (heroBuy) io.observe(heroBuy);
+    if (foot) io.observe(foot);
+    window.addEventListener('scroll', function () {
+      var s = window.scrollY > window.innerHeight * 0.5;
+      if (s !== scrolled) { scrolled = s; syncBar(); }
+    }, { passive: true });
+  }
 
   // Every [data-tix] button opens the My805Tix sales modal, so guests buy
   // without leaving the site. The modal script (loaded in each page's <head>)
@@ -143,13 +197,16 @@
     var lb = document.createElement('div');
     lb.className = 'lightbox';
     lb.hidden = true;
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Photo viewer');
     lb.innerHTML =
       '<div class="lightbox-stage">' +
         '<button type="button" class="lightbox-close" aria-label="Close">&times;</button>' +
         '<button type="button" class="lightbox-prev" aria-label="Previous photo">&lsaquo;</button>' +
         '<img class="lightbox-img" alt="" />' +
         '<button type="button" class="lightbox-next" aria-label="Next photo">&rsaquo;</button>' +
-        '<p class="lightbox-cap"></p>' +
+        '<p class="lightbox-cap" aria-live="polite"></p>' +
       '</div>';
     document.body.appendChild(lb);
 
@@ -198,6 +255,14 @@
     }
 
     function lbOnKey(e) {
+      if (e.key === 'Tab') {
+        // Keep focus inside the viewer while it is open.
+        var f = [lbClose, lbPrev, lbNext];
+        var i = f.indexOf(document.activeElement);
+        e.preventDefault();
+        f[(i + (e.shiftKey ? f.length - 1 : 1)) % f.length].focus();
+        return;
+      }
       if (e.key === 'Escape') lbClose_();
       else if (e.key === 'ArrowLeft') lbStep(-1);
       else if (e.key === 'ArrowRight') lbStep(1);
@@ -250,7 +315,18 @@
 
       var slideOrder = Array.prototype.slice.call(heroSlides);
       var slideIndex = 0;
+      var slidePaused = false;
+      var slideToggle = document.getElementById('slideToggle');
+      if (slideToggle) {
+        slideToggle.hidden = false;
+        slideToggle.addEventListener('click', function () {
+          slidePaused = !slidePaused;
+          slideToggle.setAttribute('aria-pressed', slidePaused ? 'true' : 'false');
+          slideToggle.textContent = slidePaused ? 'Play slideshow' : 'Pause slideshow';
+        });
+      }
       setInterval(function () {
+        if (slidePaused || document.hidden) return;
         var prev = slideOrder[slideIndex];
         slideIndex = (slideIndex + 1) % slideOrder.length;
         var next = slideOrder[slideIndex];
@@ -258,6 +334,17 @@
         if (next.hasAttribute('data-slide')) next.classList.add('is-active');
       }, 6000);
     }
+  }
+
+  // ---- 6b. Photo strip pause (WCAG 2.2.2) ----------------------------------
+  var stripToggle = document.getElementById('stripToggle');
+  if (stripToggle) {
+    var band = stripToggle.closest('.strip-band');
+    stripToggle.addEventListener('click', function () {
+      var paused = band.classList.toggle('is-paused');
+      stripToggle.setAttribute('aria-pressed', paused ? 'true' : 'false');
+      stripToggle.textContent = paused ? 'Play photos' : 'Pause photos';
+    });
   }
 
   // ---- 7. Sponsor inquiry --------------------------------------------------
@@ -279,8 +366,16 @@
         var el = sForm.elements[k];
         d[k] = el ? (el.value || '').trim() : '';
       });
-      if (!d.name || !d.company || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) {
+      var bad = [];
+      if (!d.name) bad.push('name');
+      if (!d.company) bad.push('company');
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) bad.push('email');
+      ['name', 'company', 'email'].forEach(function (k) {
+        sForm.elements[k].setAttribute('aria-invalid', bad.indexOf(k) > -1 ? 'true' : 'false');
+      });
+      if (bad.length) {
         sMsg.textContent = 'Add your name, brand and a valid email, then send.';
+        sForm.elements[bad[0]].focus();
         return;
       }
       sBtn.disabled = true;

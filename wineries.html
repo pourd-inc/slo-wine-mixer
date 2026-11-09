@@ -17,24 +17,25 @@
 <script src="https://www.my805tix.com/ts_modal.js"></script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap nav-inner">
     <a href="/" class="nav-logo" aria-label="SLO Wine Mixer home"><img src="assets/swm-logo.png" alt="SLO Wine Mixer" /></a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="/#tickets">Tickets</a>
-      <a href="/#mixer">The Mixer</a>
+      <a href="/#experience">What to expect</a>
       <a href="/photos">Photos</a>
       <a href="/wineries" aria-current="page">Wineries</a>
       <a href="/sponsors">Sponsors</a>
       <button type="button" class="btn red" data-tix>Buy tickets</button>
     </nav>
-    <button type="button" class="btn red nav-buy" data-tix>Tickets</button>
+    <button type="button" class="btn red nav-buy" data-tix>Buy tickets</button>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
 
   <section class="hero hero-short" aria-labelledby="open-h">
     <img class="hero-bg" src="assets/DSCF2438.jpg" alt="" fetchpriority="high" />
@@ -84,7 +85,7 @@
         <span class="eyebrow">What you get back</span>
         <h2 id="report-h">Take home a report on your wines.</h2>
         <div class="prose" style="margin-top:18px">
-          <p>The Mixer runs on pourd, software for wineries. At check-in your bottles are counted onto an iPad; at check-out they are counted again. Guests can rate what they taste and say whether they would buy or visit. After the event you get your own report.</p>
+          <p>SLO Wine Mixer runs on pourd, software for wineries. At check-in your bottles are counted onto an iPad; at check-out they are counted again. Guests can rate what they taste and say whether they would buy or visit. After the event you get your own report.</p>
           <p><b>What is measured:</b> bottles checked in and out, and the ratings and intent guests choose to submit. It does not track individual guests table to table, and it does not sell you anyone's contact details.</p>
         </div>
       </header>
@@ -168,14 +169,14 @@
         <h2 id="request-h">Reserve your Year 2 booth.</h2>
       </header>
       <div>
-        <p class="lede" style="margin-bottom:22px">Sign up on pourd, the software the Mixer runs on. Booths are limited to 65 wineries. Questions first? Email us and we reply within two business days.</p>
+        <p class="lede" style="margin-bottom:22px">Sign up on pourd, the software SLO Wine Mixer runs on. Booths are limited to 65 wineries. Questions first? Email us and we reply within two business days.</p>
         <div class="contact">
           <a href="https://pourdhq.com/join/271c777a9238420580b32073bf174a0c" class="btn gold">Sign up to pour</a>
           <a href="mailto:hello@pourdhq.com?subject=SLO%20Wine%20Mixer%20Year%202%20winery%20question" class="btn ghost">Email a question</a>
           <button type="button" class="copy-link" data-copy="hello@pourdhq.com">Copy address</button>
           <span class="copied" aria-live="polite"></span>
         </div>
-        <p class="fine on-red">hello@pourdhq.com. The Mixer's inbox is run by pourd, the software the event runs on.</p>
+        <p class="fine on-red">hello@pourdhq.com. The SLO Wine Mixer inbox is run by pourd, the software the event runs on.</p>
       </div>
     </div>
   </section>
@@ -190,9 +191,9 @@
         <p>Saturday, April 3, 2027 · 2–5 PM<br />Madonna Inn Expo Center<br />120 Madonna Road, San Luis Obispo, CA<br />A Wine Event Z LLC production.</p>
       </div>
       <nav class="foot-nav" aria-label="Footer">
-        <b>The Mixer</b>
+        <b>SLO Wine Mixer</b>
         <a href="/#tickets">Tickets</a>
-        <a href="/#mixer">What happens</a>
+        <a href="/#experience">What to expect</a>
         <a href="/photos">Year 1 photos</a>
         <a href="/#list">Join the list</a>
       </nav>
@@ -216,6 +217,11 @@
     </div>
   </div>
 </footer>
+
+<div class="buy-bar" id="buyBar" hidden>
+  <p><b>April 3, 2027</b><span>From <span data-tier-price>$65</span> · No fees</span></p>
+  <button type="button" class="btn gold" data-tix>Buy tickets</button>
+</div>
 
 <script src="site.js" defer></script>
 </body>

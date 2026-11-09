@@ -19,27 +19,28 @@
 <script src="https://www.my805tix.com/ts_modal.js"></script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap nav-inner">
     <a href="/" class="nav-logo" aria-label="SLO Wine Mixer home"><img src="assets/swm-logo.png" alt="SLO Wine Mixer" /></a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="/#tickets">Tickets</a>
-      <a href="#mixer">The Mixer</a>
+      <a href="#experience">What to expect</a>
       <a href="/photos">Photos</a>
       <a href="/wineries">Wineries</a>
       <a href="/sponsors">Sponsors</a>
       <button type="button" class="btn red" data-tix>Buy tickets</button>
     </nav>
-    <button type="button" class="btn red nav-buy" data-tix>Tickets</button>
+    <button type="button" class="btn red nav-buy" data-tix>Buy tickets</button>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
 
   <!-- Opening: full-bleed photo with the red wash -->
-  <section class="hero" aria-labelledby="open-h">
+  <section class="hero hero-home" aria-labelledby="open-h">
     <img class="hero-bg" src="assets/DSCF2495.jpg" alt="" fetchpriority="high" />
     <img class="hero-bg" data-slide data-src="photos/attendees/dscf2857.jpg" alt="" />
     <img class="hero-bg" data-slide data-src="photos/way-out-west/dscf2789.jpg" alt="" />
@@ -53,44 +54,34 @@
     <img class="hero-bg" data-slide data-src="photos/attendees/dscf3021.jpg" alt="" />
     <img class="hero-bg" data-slide data-src="photos/event/dscf2929.jpg" alt="" />
     <div class="hero-wash" aria-hidden="true"></div>
-    <div class="wrap hero-inner">
-      <span class="eyebrow">SLO Wine Mixer · Year 2 · San Luis Obispo</span>
-      <h1 id="open-h">Good wine. Live music. Coastal Cowboy.</h1>
-      <p class="lede">A wine tasting that feels like a festival. Central Coast wineries pouring unlimited samples, a live band all afternoon, and an outdoor village of food trucks, vendors and activations.</p>
-
-      <div class="hero-actions">
-        <p class="date-line">Saturday, April 3, 2027 · 2–5 PM<small>Madonna Inn Expo Center · San Luis Obispo, CA</small></p>
-
-        <div class="buy">
-          <button type="button" class="btn gold btn-lg" data-tix>Buy tickets</button>
-          <p class="buy-note" data-before-onsale>Early Bird opens December 1 at $65. No fees on any ticket.</p>
-          <p class="buy-note" data-after-onsale hidden>From $65. No fees on any ticket. <a class="link on-dark" href="#tickets">See prices</a></p>
-        </div>
-
-        <div id="list">
-          <form class="capture on-dark" data-source="home" novalidate>
-            <label for="homeEmail" class="sr">Email address</label>
-            <input type="email" id="homeEmail" name="email" placeholder="you@email.com" required autocomplete="email" />
-            <button type="submit" class="btn ghost">Join the list</button>
-            <span class="note" data-before-onsale>Not ready yet? One email when Early Bird opens, then event updates.</span>
-            <span class="note" data-after-onsale hidden>Not ready yet? Event updates and the lineup as it lands.</span>
-            <span class="msg" role="status" aria-live="polite"></span>
-          </form>
-        </div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">SLO Wine Mixer · Year 2 · San Luis Obispo</p>
+        <h1 id="open-h">Good wine. Live music. Coastal Cowboy.</h1>
+        <p class="lede">A wine tasting that feels like a festival: Central Coast wineries pouring unlimited samples, a live band all afternoon, and an outdoor village of food trucks and activations.</p>
+        <ul class="event-meta" aria-label="Event details">
+          <li><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path fill="none" stroke="currentColor" stroke-width="2" d="M4 6h16v14H4zM4 10h16M8 3v5M16 3v5"/></svg><span>Saturday, April 3, 2027</span></li>
+          <li><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" d="M12 7v5l3 2"/></svg><span>2–5 PM</span></li>
+          <li><svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3" fill="currentColor"/></svg><span>Madonna Inn Expo Center, San Luis Obispo</span></li>
+        </ul>
       </div>
-      <p class="hero-cap">Photos from Year 1 · June 6, 2026</p>
-    </div>
-  </section>
 
-  <!-- Quick answers -->
-  <section class="section facts" aria-label="Quick answers">
-    <div class="wrap">
-      <dl class="fact-row">
-        <div><dt>Date</dt><dd>Saturday, April 3, 2027. 2–5 PM.</dd></div>
-        <div><dt>Venue</dt><dd>Madonna Inn Expo Center, 120 Madonna Road, San Luis Obispo.</dd></div>
-        <div><dt>Tickets</dt><dd data-before-onsale>From $65. Early Bird opens December 1. No fees.</dd><dd data-after-onsale hidden>On sale now from $65. No fees.</dd></div>
-        <div><dt>Age</dt><dd>21 and over. ID at the door.</dd></div>
-      </dl>
+      <section class="ticket-card" aria-labelledby="tc-h">
+        <h2 id="tc-h" class="tc-head">Tickets</h2>
+        <p class="tc-price"><span class="tc-from">From</span> <b data-tier-price>$65</b></p>
+        <p class="tc-tier" data-tier-label>Early Bird opens December 1</p>
+        <button type="button" class="btn gold btn-xl" data-tix id="heroBuy">Buy tickets</button>
+        <ul class="tc-points">
+          <li>No fees. The price you see is the price you pay.</li>
+          <li>Unlimited tastings, a souvenir cup and live music.</li>
+          <li>21+ with a valid photo ID.</li>
+        </ul>
+        <a class="tc-link" href="#tickets">See every ticket price</a>
+      </section>
+    </div>
+    <div class="wrap hero-foot">
+      <p class="hero-cap">Photos from Year 1 · June 6, 2026</p>
+      <button type="button" class="motion-toggle" id="slideToggle" aria-pressed="false" hidden>Pause slideshow</button>
     </div>
   </section>
 
@@ -105,10 +96,10 @@
       </header>
       <div>
         <ol class="tiers">
-          <li><div><h3>Early Bird</h3><p>December 1 – December 31</p></div><b>$65</b></li>
-          <li><div><h3>Advance Presale</h3><p>January 1 – February 19</p></div><b>$80</b></li>
-          <li><div><h3>General Admission</h3><p>February 20 – April 2</p></div><b>$95</b></li>
-          <li><div><h3>At the door</h3><p>April 3</p></div><b>$105</b></li>
+          <li data-tier="early"><div><h3>Early Bird</h3><p>December 1 – December 31</p></div><b>$65</b></li>
+          <li data-tier="advance"><div><h3>Advance Presale</h3><p>January 1 – February 19</p></div><b>$80</b></li>
+          <li data-tier="ga"><div><h3>General Admission</h3><p>February 20 – April 2</p></div><b>$95</b></li>
+          <li data-tier="door"><div><h3>At the door</h3><p>April 3</p></div><b>$105</b></li>
         </ol>
         <p class="also"><b>Every ticket includes</b> a souvenir tasting cup, unlimited samples from Central Coast wineries, the outdoor village and live music the whole time.</p>
         <p class="also"><b>Getting here.</b> Rideshare, a designated driver or the shuttle. Shuttle pickup points are announced closer to the event. Please do not drive.</p>
@@ -117,12 +108,12 @@
   </section>
 
   <!-- What happens -->
-  <section class="section" id="mixer" aria-labelledby="mixer-h">
+  <section class="section" id="experience" aria-labelledby="experience-h">
     <div class="wrap">
       <div class="two">
         <header>
-          <span class="eyebrow">What happens at the Mixer</span>
-          <h2 id="mixer-h">Year 2 is bigger, on purpose.</h2>
+          <span class="eyebrow">What to expect</span>
+          <h2 id="experience-h">Year 2 is bigger, on purpose.</h2>
           <p class="lede" style="margin-top:18px">Wine and the band stay inside. Everything else moves outdoors. Winery lineup, activations and inclusions are announced as they are confirmed.</p>
         </header>
         <div>
@@ -134,11 +125,11 @@
           <p class="also"><b>Coastal Cowboy is the dress code.</b> Hats, boots, denim, whatever the coast means to you. Same brand, same cups as Year 1.</p>
         </div>
       </div>
-      <ul class="photo-row" aria-label="Year 1 at the Mixer">
-        <li><a href="photos/event/dscf2426.jpg" data-lightbox="mixer"><img src="photos/event/thumbs/dscf2426.jpg" alt="A winemaker pouring a taste at Year 1" loading="lazy" /></a><span>Pouring at the tables</span></li>
-        <li><a href="photos/way-out-west/dscf2509.jpg" data-lightbox="mixer"><img src="photos/way-out-west/thumbs/dscf2509.jpg" alt="Way Out West playing on stage at Year 1" loading="lazy" /></a><span>Way Out West on stage</span></li>
-        <li><a href="photos/event/dscf3049.jpg" data-lightbox="mixer"><img src="photos/event/thumbs/dscf3049.jpg" alt="Guests dancing in front of the stage" loading="lazy" /></a><span>The dance floor</span></li>
-        <li><a href="photos/wine-ed-with-sam/dscf2700.jpg" data-lightbox="mixer"><img src="photos/wine-ed-with-sam/thumbs/dscf2700.jpg" alt="A table of guests at the No Snob wine class" loading="lazy" /></a><span>The No Snob wine class</span></li>
+      <ul class="photo-row" aria-label="Photos from Year 1">
+        <li><a href="photos/event/dscf2426.jpg" data-lightbox="experience"><img src="photos/event/thumbs/dscf2426.jpg" alt="A winemaker pouring a taste at Year 1" loading="lazy" /></a><span>Pouring at the tables</span></li>
+        <li><a href="photos/way-out-west/dscf2509.jpg" data-lightbox="experience"><img src="photos/way-out-west/thumbs/dscf2509.jpg" alt="Way Out West playing on stage at Year 1" loading="lazy" /></a><span>Way Out West on stage</span></li>
+        <li><a href="photos/event/dscf3049.jpg" data-lightbox="experience"><img src="photos/event/thumbs/dscf3049.jpg" alt="Guests dancing in front of the stage" loading="lazy" /></a><span>The dance floor</span></li>
+        <li><a href="photos/wine-ed-with-sam/dscf2700.jpg" data-lightbox="experience"><img src="photos/wine-ed-with-sam/thumbs/dscf2700.jpg" alt="A table of guests at the No Snob wine class" loading="lazy" /></a><span>The No Snob wine class</span></li>
       </ul>
       <p class="fine" style="margin-top:10px">Photos from Year 1, June 6, 2026.</p>
     </div>
@@ -188,7 +179,7 @@
         <a href="photos/wine-ed-with-sam/dscf2584.jpg" class="c3" data-lightbox="year1"><img src="photos/wine-ed-with-sam/dscf2584.jpg" alt="The host leading a No Snob wine class" loading="lazy" /></a>
         <a href="photos/event/dscf2525.jpg" class="c2" data-lightbox="year1"><img src="photos/event/thumbs/dscf2525.jpg" alt="A pour at a winery table" loading="lazy" /></a>
         <a href="photos/attendees/dscf2451.jpg" class="c2" data-lightbox="year1"><img src="photos/attendees/thumbs/dscf2451.jpg" alt="A group of friends under the neon sign" loading="lazy" /></a>
-        <a href="photos/event/dscf2772.jpg" class="c2" data-lightbox="year1"><img src="photos/event/thumbs/dscf2772.jpg" alt="Guests dancing at the Mixer" loading="lazy" /></a>
+        <a href="photos/event/dscf2772.jpg" class="c2" data-lightbox="year1"><img src="photos/event/thumbs/dscf2772.jpg" alt="Guests dancing at SLO Wine Mixer Year 1" loading="lazy" /></a>
       </div>
       <p class="year1-more"><a href="/photos" class="btn">See all 158 photos</a></p>
     </div>
@@ -196,6 +187,7 @@
 
   <!-- Year 1 photo strip -->
   <section class="strip-band" aria-label="More photos from Year 1">
+    <button type="button" class="motion-toggle on-strip" id="stripToggle" aria-pressed="false">Pause photos</button>
     <a href="/photos" class="strip" aria-label="See all 158 Year 1 photos">
       <ul class="strip-track"><li><img src="photos/event/thumbs/dscf2424.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2453.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2484.jpg" alt="" loading="lazy" /></li><li><img src="photos/wine-ed-with-sam/thumbs/dscf2590.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2832.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2862.jpg" alt="" loading="lazy" /></li><li><img src="photos/way-out-west/thumbs/dscf2974.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2947.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2978.jpg" alt="" loading="lazy" /></li><li><img src="photos/wine-ed-with-sam/thumbs/dscf3126.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2885.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf3019.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2896.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf3043.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2529.jpg" alt="" loading="lazy" /></li><li><img src="photos/wine-ed-with-sam/thumbs/dscf2703.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf3002.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2930.jpg" alt="" loading="lazy" /></li><li><img src="photos/way-out-west/thumbs/dscf3120.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2757.jpg" alt="" loading="lazy" /></li></ul>
       <ul class="strip-track" aria-hidden="true"><li><img src="photos/event/thumbs/dscf2424.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2453.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2484.jpg" alt="" loading="lazy" /></li><li><img src="photos/wine-ed-with-sam/thumbs/dscf2590.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2832.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2862.jpg" alt="" loading="lazy" /></li><li><img src="photos/way-out-west/thumbs/dscf2974.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2947.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2978.jpg" alt="" loading="lazy" /></li><li><img src="photos/wine-ed-with-sam/thumbs/dscf3126.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2885.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf3019.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2896.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf3043.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2529.jpg" alt="" loading="lazy" /></li><li><img src="photos/wine-ed-with-sam/thumbs/dscf2703.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf3002.jpg" alt="" loading="lazy" /></li><li><img src="photos/event/thumbs/dscf2930.jpg" alt="" loading="lazy" /></li><li><img src="photos/way-out-west/thumbs/dscf3120.jpg" alt="" loading="lazy" /></li><li><img src="photos/attendees/thumbs/dscf2757.jpg" alt="" loading="lazy" /></li></ul>
@@ -265,7 +257,7 @@
   </section>
 
   <!-- Final signup -->
-  <section class="section red" aria-labelledby="list-h">
+  <section class="section red" id="list" aria-labelledby="list-h">
     <div class="wrap two" style="align-items:center">
       <header style="position:static">
         <span class="eyebrow">Stay close</span>
@@ -294,9 +286,9 @@
         <p>Saturday, April 3, 2027 · 2–5 PM<br />Madonna Inn Expo Center<br />120 Madonna Road, San Luis Obispo, CA<br />A Wine Event Z LLC production.</p>
       </div>
       <nav class="foot-nav" aria-label="Footer">
-        <b>The Mixer</b>
+        <b>SLO Wine Mixer</b>
         <a href="/#tickets">Tickets</a>
-        <a href="/#mixer">What happens</a>
+        <a href="/#experience">What to expect</a>
         <a href="/photos">Year 1 photos</a>
         <a href="#list">Join the list</a>
       </nav>
@@ -320,6 +312,11 @@
     </div>
   </div>
 </footer>
+
+<div class="buy-bar" id="buyBar" hidden>
+  <p><b>April 3, 2027</b><span>From <span data-tier-price>$65</span> · No fees</span></p>
+  <button type="button" class="btn gold" data-tix>Buy tickets</button>
+</div>
 
 <script src="site.js" defer></script>
 </body>

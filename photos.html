@@ -17,31 +17,32 @@
 <script src="https://www.my805tix.com/ts_modal.js"></script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap nav-inner">
     <a href="/" class="nav-logo" aria-label="SLO Wine Mixer home"><img src="assets/swm-logo.png" alt="SLO Wine Mixer" /></a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="/#tickets">Tickets</a>
-      <a href="/#mixer">The Mixer</a>
+      <a href="/#experience">What to expect</a>
       <a href="/photos" aria-current="page">Photos</a>
       <a href="/wineries">Wineries</a>
       <a href="/sponsors">Sponsors</a>
       <button type="button" class="btn red" data-tix>Buy tickets</button>
     </nav>
-    <button type="button" class="btn red nav-buy" data-tix>Tickets</button>
+    <button type="button" class="btn red nav-buy" data-tix>Buy tickets</button>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
 
   <section class="hero hero-short" aria-labelledby="open-h">
     <img class="hero-bg" src="photos/event/dscf2823.jpg" alt="" fetchpriority="high" />
     <div class="hero-wash" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <span class="eyebrow">Year 1 · June 6, 2026 · Madonna Inn Expo Center</span>
-      <h1 id="open-h" class="h1-mid">What the first Mixer looked like.</h1>
+      <h1 id="open-h" class="h1-mid">SLO Wine Mixer Year 1, in photos.</h1>
       <p class="lede">158 photos from June 6: about 750 guests and 41 wineries pouring at the Madonna Inn Expo Center.</p>
     </div>
   </section>
@@ -50,7 +51,7 @@
   <section class="section photo-jump" aria-label="Jump to a photo group">
     <div class="wrap">
       <nav class="jump-row" aria-label="Photo groups">
-          <a href="#mixer-photos">The Mixer</a>
+          <a href="#mixer-photos">The event</a>
           <a href="#guests">The Guests</a>
           <a href="#wine-ed">No Snob Wine Class with Sam</a>
           <a href="#way-out-west">Way Out West on stage</a>
@@ -61,7 +62,7 @@
   <section class="section photo-section" id="mixer-photos" aria-labelledby="mixer-photos-h">
     <div class="wrap">
       <span class="eyebrow">71 photos</span>
-      <h2 id="mixer-photos-h">The Mixer</h2>
+      <h2 id="mixer-photos-h">The event</h2>
       <div class="photo-grid">
         <a href="/photos/event/dscf2424.jpg" data-lightbox="event"><img src="/photos/event/thumbs/dscf2424.jpg" width="480" height="320" loading="lazy" decoding="async" alt="Wine tasting and dancing on the floor at the SLO Wine Mixer, photo 1 of 71" /></a>
         <a href="/photos/event/dscf2426.jpg" data-lightbox="event"><img src="/photos/event/thumbs/dscf2426.jpg" width="480" height="320" loading="lazy" decoding="async" alt="Wine tasting and dancing on the floor at the SLO Wine Mixer, photo 2 of 71" /></a>
@@ -284,9 +285,9 @@
         <p>Saturday, April 3, 2027 · 2–5 PM<br />Madonna Inn Expo Center<br />120 Madonna Road, San Luis Obispo, CA<br />A Wine Event Z LLC production.</p>
       </div>
       <nav class="foot-nav" aria-label="Footer">
-        <b>The Mixer</b>
+        <b>SLO Wine Mixer</b>
         <a href="/#tickets">Tickets</a>
-        <a href="/#mixer">What happens</a>
+        <a href="/#experience">What to expect</a>
         <a href="/photos">Year 1 photos</a>
         <a href="/#list">Join the list</a>
       </nav>
@@ -310,6 +311,11 @@
     </div>
   </div>
 </footer>
+
+<div class="buy-bar" id="buyBar" hidden>
+  <p><b>April 3, 2027</b><span>From <span data-tier-price>$65</span> · No fees</span></p>
+  <button type="button" class="btn gold" data-tix>Buy tickets</button>
+</div>
 
 <script src="site.js" defer></script>
 </body>

@@ -17,31 +17,32 @@
 <script src="https://www.my805tix.com/ts_modal.js"></script>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap nav-inner">
     <a href="/" class="nav-logo" aria-label="SLO Wine Mixer home"><img src="assets/swm-logo.png" alt="SLO Wine Mixer" /></a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="/#tickets">Tickets</a>
-      <a href="/#mixer">The Mixer</a>
+      <a href="/#experience">What to expect</a>
       <a href="/photos">Photos</a>
       <a href="/wineries">Wineries</a>
       <a href="/sponsors" aria-current="page">Sponsors</a>
       <button type="button" class="btn red" data-tix>Buy tickets</button>
     </nav>
-    <button type="button" class="btn red nav-buy" data-tix>Tickets</button>
+    <button type="button" class="btn red nav-buy" data-tix>Buy tickets</button>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
   </div>
 </header>
 
-<main>
+<main id="main" tabindex="-1">
 
   <section class="hero hero-short" aria-labelledby="open-h">
     <img class="hero-bg hero-bg-right" src="assets/DSCF2940.jpg" alt="" fetchpriority="high" />
     <div class="hero-wash" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <span class="eyebrow">For sponsors · Year 2 · 2027</span>
-      <h1 id="open-h" class="h1-mid">Put your brand in the middle of the Mixer.</h1>
+      <h1 id="open-h" class="h1-mid">Put your brand in the middle of SLO Wine Mixer.</h1>
       <p class="lede">Choose a sponsorship on the stage, the outdoor village, the photo wall, or the souvenir cups every guest takes home.</p>
       <div class="contact hero-actions">
         <a href="#ask" class="btn gold">Ask about 2027 sponsorships</a>
@@ -61,7 +62,7 @@
   <section class="section cream2" aria-labelledby="who-h">
     <div class="wrap two">
       <header>
-        <span class="eyebrow">Who came to the first Mixer</span>
+        <span class="eyebrow">Who came to Year 1</span>
         <h2 id="who-h">The 2026 crowd.</h2>
       </header>
       <div class="prose">
@@ -74,7 +75,7 @@
       <ul class="photo-row" aria-label="The Year 1 crowd" style="margin-top:40px">
         <li><a href="photos/attendees/dscf2776.jpg" data-lightbox="crowd"><img src="photos/attendees/thumbs/dscf2776.jpg" alt="Friends toasting with their tasting cups" loading="lazy" /></a></li>
         <li><a href="photos/attendees/dscf2832.jpg" data-lightbox="crowd"><img src="photos/attendees/thumbs/dscf2832.jpg" alt="Friends in cowboy hats at Year 1" loading="lazy" /></a></li>
-        <li><a href="photos/attendees/dscf3021.jpg" data-lightbox="crowd"><img src="photos/attendees/thumbs/dscf3021.jpg" alt="Three friends posing at the Mixer" loading="lazy" /></a></li>
+        <li><a href="photos/attendees/dscf3021.jpg" data-lightbox="crowd"><img src="photos/attendees/thumbs/dscf3021.jpg" alt="Three friends posing at SLO Wine Mixer Year 1" loading="lazy" /></a></li>
         <li><a href="photos/attendees/dscf2885.jpg" data-lightbox="crowd"><img src="photos/attendees/thumbs/dscf2885.jpg" alt="Guests in western hats at Year 1" loading="lazy" /></a></li>
       </ul>
     </div>
@@ -126,7 +127,7 @@
       <div class="table-wrap">
         <table class="compare">
           <thead>
-            <tr><th></th><th>Presenting</th><th>Activation</th><th>Product / in-kind</th></tr>
+            <tr><td></td><th>Presenting</th><th>Activation</th><th>Product / in-kind</th></tr>
           </thead>
           <tbody>
             <tr><th>What you own</th><td>Name on the event, stage and tickets</td><td>One placement: stage, village, photo wall, bull or window</td><td>Your product in guests' hands</td></tr>
@@ -173,7 +174,7 @@
           <button type="submit" class="btn gold">Request the sponsor deck</button>
           <p class="msg" role="status" aria-live="polite"></p>
         </form>
-        <p class="fine on-red">Prefer email? <a href="mailto:hello@pourdhq.com?subject=SLO%20Wine%20Mixer%202027%20sponsorship">hello@pourdhq.com</a>. The Mixer's inbox is run by pourd, the software the event runs on.</p>
+        <p class="fine on-red">Prefer email? <a href="mailto:hello@pourdhq.com?subject=SLO%20Wine%20Mixer%202027%20sponsorship">hello@pourdhq.com</a>. The SLO Wine Mixer inbox is run by pourd, the software the event runs on.</p>
       </div>
     </div>
   </section>
@@ -188,9 +189,9 @@
         <p>Saturday, April 3, 2027 · 2–5 PM<br />Madonna Inn Expo Center<br />120 Madonna Road, San Luis Obispo, CA<br />A Wine Event Z LLC production.</p>
       </div>
       <nav class="foot-nav" aria-label="Footer">
-        <b>The Mixer</b>
+        <b>SLO Wine Mixer</b>
         <a href="/#tickets">Tickets</a>
-        <a href="/#mixer">What happens</a>
+        <a href="/#experience">What to expect</a>
         <a href="/photos">Year 1 photos</a>
         <a href="/#list">Join the list</a>
       </nav>
@@ -214,6 +215,11 @@
     </div>
   </div>
 </footer>
+
+<div class="buy-bar" id="buyBar" hidden>
+  <p><b>April 3, 2027</b><span>From <span data-tier-price>$65</span> · No fees</span></p>
+  <button type="button" class="btn gold" data-tix>Buy tickets</button>
+</div>
 
 <script src="site.js" defer></script>
 </body>
