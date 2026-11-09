@@ -132,7 +132,7 @@
     lbLinks.forEach(function (a) {
       var slug = a.getAttribute('data-lightbox');
       if (!lbGroups[slug]) {
-        var section = a.closest('.photo-section');
+        var section = a.closest('.photo-section') || a.closest('section');
         var h2 = section ? section.querySelector('h2') : null;
         lbGroups[slug] = { title: h2 ? h2.textContent.trim() : '', items: [] };
       }
@@ -168,7 +168,7 @@
       var item = g.items[curIndex];
       lbImg.src = item.href;
       lbImg.alt = item.alt || '';
-      lbCap.textContent = (curIndex + 1) + ' of ' + g.items.length + ' · ' + g.title;
+      lbCap.textContent = (curIndex + 1) + ' of ' + g.items.length + (g.title ? ' · ' + g.title : '');
       lbPreload(g.items[(curIndex - 1 + g.items.length) % g.items.length].href);
       lbPreload(g.items[(curIndex + 1) % g.items.length].href);
     }
